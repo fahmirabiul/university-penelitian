@@ -197,6 +197,7 @@ This application operates as a Client in an OAuth2 distributed system and delega
     - Use PHP 8.3 syntax (readonly properties, named arguments, strict typing)[cite: 4].
     - Controllers must be extremely thin, serving only to route requests, call Services/State managers, and return responses.
     - Always specify return types and argument types for methods.
+    - **Frontend:** Always use **Vuexy Bootstrap** HTML structures, classes, and layouts when generating Blade views. Reference static assets using `asset('assets/...')`.
 
 ## Action Plan
 

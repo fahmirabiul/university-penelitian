@@ -1,7 +1,7 @@
 **1. Tech Stack & Environment**
 
 - **Backend:** PHP 8.3, Laravel 13.
-- **Frontend:** Blade Template Engine + Vite (Pendekatan MVC Klasik).
+- **Frontend:** Blade Template Engine + Vite (Pendekatan MVC Klasik). Menggunakan template **Vuexy Bootstrap** (semua file CSS/JS/Image statis sudah ada di direktori `public/assets`).
 - **Database:** MySQL (Menggunakan *InnoDB Engine* untuk mendukung *Database Transactions*).
 - **Cache & Queue Driver:** Redis.
 - **File Storage:** Flysystem dengan *driver* lokal (direktori non-publik) atau simulasi S3 (MinIO).
