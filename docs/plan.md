@@ -11,10 +11,10 @@ Berdasarkan dokumen PRD, TDD, dan Blueprint ERD Anda, kita akan membagi eksekusi
   - [x] Pastikan ekstensi `phpredis` aktif di `php.ini` atau jalankan `composer require predis/predis`.
 
 ## Fase 1: Fondasi Autentikasi & Identitas (SSO OAuth2)
-- [ ] Instal package Laravel Socialite (`composer require laravel/socialite`).
-- [ ] Modifikasi migration tabel `users` (hapus password, tambahkan `sso_id`, `role_lokal`).
+- [x] Instal package Laravel Socialite (`composer require laravel/socialite`).
+- [x] Modifikasi migration tabel `users` (hapus password, tambahkan `sso_id`, `role_lokal`).
 - [ ] Buat `SsoAuthController` untuk *redirect* & *callback* ke Identity Provider (IdP).
-- [ ] Konfigurasi mekanisme *Guard/Provider* agar aplikasi mengenali user dari SSO.
+- [x] Konfigurasi mekanisme *Guard/Provider* agar aplikasi mengenali user dari SSO.
 - [ ] **Redis Caching**: Implementasi cache untuk menyimpan data profil user dari SSO ke Redis (menghindari lambatnya N+1 HTTP Request ke server IdP).
 
 ## Fase 2: Struktur Database Inti (Migrations & Models)

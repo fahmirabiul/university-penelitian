@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->uuid('sso_id')->unique()->nullable(); // ID dari server university-sso
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('email');
+            $table->string('role_lokal')->default('dosen'); // 'dosen' atau 'admin_lembaga'
             $table->rememberToken();
             $table->timestamps();
         });

@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'sso' => [
+        'client_id' => env('SSO_CLIENT_ID'),
+        'client_secret' => env('SSO_CLIENT_SECRET'),
+        'redirect' => env('SSO_REDIRECT_URI', env('APP_URL') . '/auth/callback'),
+    ],
+
 ];

@@ -19,6 +19,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Mendaftarkan Custom Provider kita ke dalam package Socialite
+        if (class_exists(\Laravel\Socialite\Facades\Socialite::class)) {
+            \Laravel\Socialite\Facades\Socialite::extend('sso', function ($app) {
+                $config = $app['config']['services.sso'];
+                return \Laravel\Socialite\Facades\Socialite::buildProvider(SsoSocialiteProvider::class, $config);
+            });
+        }
     }
 }
