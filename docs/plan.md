@@ -3,12 +3,12 @@
 Berdasarkan dokumen PRD, TDD, dan Blueprint ERD Anda, kita akan membagi eksekusi proyek ini ke dalam beberapa fase. Pendekatan ini memastikan kita membangun sistem secara bertahap (tidak sekaligus masif) untuk meminimalisir bug pada arsitektur.
 
 ## Fase 0: Setup Environment Tambahan (Redis & Database)
-- [ ] Pastikan database `university_penelitian` sudah terbuat di MySQL.
-- [ ] Jalankan `php artisan migrate` awal untuk memastikan koneksi lancar.
-- [ ] **Setup Redis:**
-  - [ ] Pastikan service/server Redis lokal (Windows/WSL/Docker) sudah berjalan.
-  - [ ] Update `.env`: Ubah `CACHE_STORE=redis`, `SESSION_DRIVER=redis`, `QUEUE_CONNECTION=redis`.
-  - [ ] Pastikan ekstensi `phpredis` aktif di `php.ini` atau jalankan `composer require predis/predis`.
+- [x] Pastikan database `university_penelitian` sudah terbuat di MySQL.
+- [x] Jalankan `php artisan migrate` awal untuk memastikan koneksi lancar.
+- [x] **Setup Redis:**
+  - [x] Pastikan service/server Redis lokal (Windows/WSL/Docker) sudah berjalan.
+  - [x] Update `.env`: Ubah `CACHE_STORE=redis`, `SESSION_DRIVER=redis`, `QUEUE_CONNECTION=redis`.
+  - [x] Pastikan ekstensi `phpredis` aktif di `php.ini` atau jalankan `composer require predis/predis`.
 
 ## Fase 1: Fondasi Autentikasi & Identitas (SSO OAuth2)
 - [ ] Instal package Laravel Socialite (`composer require laravel/socialite`).
