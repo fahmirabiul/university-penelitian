@@ -63,8 +63,8 @@ Berdasarkan dokumen PRD, TDD, dan Blueprint ERD Anda, kita akan membagi eksekusi
 - [x] Integrasikan eksekusi Job ke dalam `PenelitianObserver` untuk otomatisasi email.
 
 ### 5.2 UI Alur A: Pengajuan Penelitian & Review (Vuexy)
-- [ ] Setup base layout template Vuexy Bootstrap.
-- [ ] **Dosen**: Form Pengajuan Proposal & Halaman Detail/Tracking Status.
+- [x] Setup base layout template Vuexy Bootstrap.
+- [x] **Dosen**: Form Pengajuan Proposal & Halaman Detail/Tracking Status.
 - [ ] **Reviewer**: Daftar Penugasan & Form Evaluasi (Desk/Presentasi).
 - [ ] **Admin**: Dashboard Pengelolaan Proposal & Assignment Reviewer.
 

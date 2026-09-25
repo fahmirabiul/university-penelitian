@@ -28,4 +28,11 @@ class User extends Authenticatable
             // password dan email_verified_at dihapus karena via SSO
         ];
     }
+
+    public function penelitian()
+    {
+        return $this->belongsToMany(Penelitian::class, 'penelitian_dosen')
+            ->withPivot('peran')
+            ->withTimestamps();
+    }
 }
