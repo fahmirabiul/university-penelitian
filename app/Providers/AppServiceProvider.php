@@ -3,27 +3,25 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Penelitian;
+use App\Observers\PenelitianObserver;
+use Laravel\Socialite\Facades\Socialite;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
-        // Mendaftarkan Custom Provider kita ke dalam package Socialite
-        if (class_exists(\Laravel\Socialite\Facades\Socialite::class)) {
-            \Laravel\Socialite\Facades\Socialite::extend('sso', function ($app) {
+        Penelitian::observe(PenelitianObserver::class);
+
+        if (class_exists(Socialite::class)) {
+            Socialite::extend('sso', function ($app) {
                 $config = $app['config']['services.sso'];
-                return \Laravel\Socialite\Facades\Socialite::buildProvider(SsoSocialiteProvider::class, $config);
+                return Socialite::buildProvider(SsoSocialiteProvider::class, $config);
             });
         }
     }

@@ -46,7 +46,7 @@ Berdasarkan dokumen PRD, TDD, dan Blueprint ERD Anda, kita akan membagi eksekusi
 
 ## Fase 3: Core Design Patterns (State, Observer, Service)
 - [x] **State Pattern**: Buat base class & turunan State (`DraftState`, `DeskEvalState`, `ApprovedState`) untuk kontrol perubahan status proposal yang persisten.
-- [ ] **Observer Pattern**: Buat `ResearchObserver` untuk otomatis mencatat riwayat ke `audit_logs` saat status penelitian di-update.
+- [x] **Observer Pattern**: Buat `ResearchObserver` untuk otomatis mencatat riwayat ke `audit_logs` saat status penelitian di-update.
 - [ ] **Service Pattern**: Buat `IncentiveCalculatorService` (Logika matematis 60% ketua & 40% anggota).
 
 ## Fase 4: Authorization (RBAC) & Keamanan Dokumen
