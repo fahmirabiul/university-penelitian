@@ -50,12 +50,29 @@ Berdasarkan dokumen PRD, TDD, dan Blueprint ERD Anda, kita akan membagi eksekusi
 - [x] **Service Pattern**: Buat `IncentiveCalculatorService` (Logika matematis 60% ketua & 40% anggota).
 
 ## Fase 4: Authorization (RBAC) & Keamanan Dokumen
-- [ ] Buat Laravel Policies & Gates (Blokir dosen mereview proposal sendiri, blokir edit jika status `Submitted`).
-- [ ] Buat Route & Controller khusus untuk membaca `storage/app/private`.
-- [ ] Implementasi fitur *Temporary Signed URLs* untuk proteksi tautan unduh file PDF.
+- [x] Buat Laravel Policies & Gates (Blokir dosen mereview proposal sendiri, blokir edit jika status `Submitted`).
+- [x] Buat Route & Controller khusus untuk membaca `storage/app/private`.
+- [x] Implementasi fitur *Temporary Signed URLs* untuk proteksi tautan unduh file PDF.
 
 ## Fase 5: Pengembangan Fitur Interaktif (UI & Queue Job)
-- [ ] **Redis Queue**: Buat `Job` pengiriman Email Notifikasi agar berjalan secara asinkronus (*background worker*).
-- [ ] Bangun antarmuka (Blade/Vite) untuk Alur A: Pengajuan Penelitian & Review.
-- [ ] Bangun antarmuka untuk Alur B: Pendaftaran Publikasi Luaran.
-- [ ] Bangun antarmuka untuk Alur C: Pengajuan & Pencairan Insentif.
+*Catatan: Fase ini dipecah menjadi 4 sub-fase mengingat kompleksitas UI (Vuexy) dan integrasi antarmuka multi-role.*
+
+### 5.1 Redis Queue & Asynchronous Notifications
+- [x] Konfigurasi Redis & pastikan driver queue berjalan.
+- [x] Buat Mailable & Job (`SendPenelitianNotificationJob`).
+- [x] Integrasikan eksekusi Job ke dalam `PenelitianObserver` untuk otomatisasi email.
+
+### 5.2 UI Alur A: Pengajuan Penelitian & Review (Vuexy)
+- [ ] Setup base layout template Vuexy Bootstrap.
+- [ ] **Dosen**: Form Pengajuan Proposal & Halaman Detail/Tracking Status.
+- [ ] **Reviewer**: Daftar Penugasan & Form Evaluasi (Desk/Presentasi).
+- [ ] **Admin**: Dashboard Pengelolaan Proposal & Assignment Reviewer.
+
+### 5.3 UI Alur B: Pendaftaran Publikasi Luaran (Vuexy)
+- [ ] Form Input Publikasi (mendukung input JSON untuk `informasi_jurnal`).
+- [ ] Fitur Upload dokumen bukti jurnal.
+- [ ] UI Verifikasi/Validasi jurnal oleh Admin.
+
+### 5.4 UI Alur C: Pengajuan & Pencairan Insentif (Vuexy)
+- [ ] Dashboard Dosen (Menampilkan breakdown/estimasi hak insentif).
+- [ ] Dashboard Admin (Integrasi dengan `IncentiveCalculatorService` untuk kalkulasi 60/40 otomatis & proses pencairan batch).

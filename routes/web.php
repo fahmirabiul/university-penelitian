@@ -15,3 +15,12 @@ Route::post('/auth/logout', [SsoAuthController::class, 'logout'])->name('sso.log
 Route::get('/dashboard', function (Request $request) {
     return 'Welcome ' . $request->user()->name;
 })->middleware('auth')->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/dokumen/{dokumen}', [\App\Http\Controllers\DokumenController::class, 'download'])
+        ->name('dokumen.download');
+});
+
+Route::get('/dokumen/signed/{dokumen}', [\App\Http\Controllers\DokumenController::class, 'downloadSigned'])
+    ->name('dokumen.download.signed')
+    ->middleware('signed');
