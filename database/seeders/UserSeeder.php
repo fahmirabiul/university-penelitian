@@ -10,25 +10,44 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::create([
-            'sso_id' => Str::uuid(),
-            'name' => 'Prof. Dr. Budi Santoso',
-            'email' => 'budi.dosen@university.ac.id',
-            'role_lokal' => 'dosen',
-        ]);
+        $faker = \Faker\Factory::create('id_ID');
 
+        // 1. Super Admin
         User::create([
-            'sso_id' => Str::uuid(),
-            'name' => 'Dr. Siti Aminah',
-            'email' => 'siti.dosen@university.ac.id',
-            'role_lokal' => 'dosen',
-        ]);
-
-        User::create([
-            'sso_id' => Str::uuid(),
-            'name' => 'Reviewer LPPM Utama',
-            'email' => 'reviewer1@university.ac.id',
+            'sso_id' => '11111111-1111-1111-1111-100000000001',
+            'name' => 'Administrator Utama',
+            'email' => 'admin@university.ac.id',
             'role_lokal' => 'admin_lembaga',
         ]);
+
+        // 2. Admin Unit (4 Users)
+        for ($i = 1; $i <= 4; $i++) {
+            User::create([
+                'sso_id' => '11111111-1111-1111-1111-1000000000' . sprintf('%02d', 1 + $i),
+                'name' => "Admin Unit $i",
+                'email' => "admin.unit{$i}@university.ac.id",
+                'role_lokal' => 'admin_lembaga',
+            ]);
+        }
+
+        // 3. Dosen (10 Users)
+        for ($i = 1; $i <= 10; $i++) {
+            User::create([
+                'sso_id' => '11111111-1111-1111-1111-1000000000' . sprintf('%02d', 5 + $i),
+                'name' => $faker->name,
+                'email' => "dosen{$i}@university.ac.id",
+                'role_lokal' => 'dosen',
+            ]);
+        }
+
+        // 4. Mahasiswa (5 Users)
+        for ($i = 1; $i <= 5; $i++) {
+            User::create([
+                'sso_id' => '11111111-1111-1111-1111-1000000000' . sprintf('%02d', 15 + $i),
+                'name' => $faker->name,
+                'email' => "mhs{$i}@student.ac.id",
+                'role_lokal' => 'mahasiswa',
+            ]);
+        }
     }
 }

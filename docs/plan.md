@@ -66,7 +66,11 @@ Berdasarkan dokumen PRD, TDD, dan Blueprint ERD Anda, kita akan membagi eksekusi
 - [x] Setup base layout template Vuexy Bootstrap.
 - [x] **Dosen**: Form Pengajuan Proposal & Halaman Detail/Tracking Status.
 - [ ] **Reviewer**: Daftar Penugasan & Form Evaluasi (Desk/Presentasi).
+  - [x] Backend Logic (Controller, Route, RBAC Policy)
+  - [ ] UI Views (Vuexy)
 - [ ] **Admin**: Dashboard Pengelolaan Proposal & Assignment Reviewer.
+  - [x] Backend Logic (Controller, DB Transaction, State transisi)
+  - [ ] UI Views (Vuexy)
 
 ### 5.3 UI Alur B: Pendaftaran Publikasi Luaran (Vuexy)
 - [ ] Form Input Publikasi (mendukung input JSON untuk `informasi_jurnal`).

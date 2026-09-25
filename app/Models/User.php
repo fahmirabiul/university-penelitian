@@ -35,4 +35,11 @@ class User extends Authenticatable
             ->withPivot('peran')
             ->withTimestamps();
     }
+
+    public function penelitianSebagaiReviewer()
+    {
+        return $this->belongsToMany(Penelitian::class, 'penelitian_reviewer')
+            ->withPivot(['nilai_desk', 'komentar_desk', 'nilai_presentasi', 'komentar_presentasi', 'status_review'])
+            ->withTimestamps();
+    }
 }

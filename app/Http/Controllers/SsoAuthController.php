@@ -27,18 +27,31 @@ class SsoAuthController extends Controller
         // Cache the raw SSO payload to serve as the single source of truth for user roles.
         Cache::put('sso_profile_' . $ssoUser->getId(), $ssoUser->user, now()->addHours(2));
 
+        $ssoRoles = collect($ssoUser->user['roles'] ?? [])->pluck('name')->toArray();
+        $roleLokal = 'dosen'; // Default
+        
+        if (in_array('admin_unit', $ssoRoles) || in_array('admin', $ssoRoles)) {
+            $roleLokal = 'admin_lembaga';
+        } elseif (in_array('dosen', $ssoRoles)) {
+            $roleLokal = 'dosen';
+        } elseif (in_array('mahasiswa', $ssoRoles)) {
+            $roleLokal = 'mahasiswa';
+        }
+
         $localUser = User::firstOrCreate(
             ['sso_id' => $ssoUser->getId()],
             [
                 'name' => $ssoUser->getName(),
                 'email' => $ssoUser->getEmail(),
+                'role_lokal' => $roleLokal,
             ]
         );
 
-        if ($localUser->name !== $ssoUser->getName() || $localUser->email !== $ssoUser->getEmail()) {
+        if ($localUser->name !== $ssoUser->getName() || $localUser->email !== $ssoUser->getEmail() || $localUser->role_lokal !== $roleLokal) {
             $localUser->update([
                 'name' => $ssoUser->getName(),
                 'email' => $ssoUser->getEmail(),
+                'role_lokal' => $roleLokal,
             ]);
         }
 

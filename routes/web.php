@@ -25,6 +25,19 @@ Route::middleware('auth')->group(function () {
         Route::resource('penelitian', \App\Http\Controllers\Dosen\PenelitianController::class);
         Route::post('penelitian/{penelitian}/submit', [\App\Http\Controllers\Dosen\PenelitianController::class, 'submit'])->name('penelitian.submit');
     });
+
+    // Route untuk Reviewer
+    Route::prefix('reviewer')->name('reviewer.')->group(function () {
+        Route::get('penilaian', [\App\Http\Controllers\Reviewer\PenilaianController::class, 'index'])->name('penilaian.index');
+        Route::get('penilaian/{penelitian}', [\App\Http\Controllers\Reviewer\PenilaianController::class, 'evaluate'])->name('penilaian.evaluate');
+        Route::post('penilaian/{penelitian}/desk', [\App\Http\Controllers\Reviewer\PenilaianController::class, 'storeDeskEvaluation'])->name('penilaian.storeDesk');
+    });
+
+    // Route untuk Admin
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::resource('penelitian', \App\Http\Controllers\Admin\PenelitianController::class)->only(['index', 'show']);
+        Route::post('penelitian/{penelitian}/assign-reviewer', [\App\Http\Controllers\Admin\PenelitianController::class, 'assignReviewer'])->name('penelitian.assignReviewer');
+    });
 });
 
 Route::get('/dokumen/signed/{dokumen}', [\App\Http\Controllers\DokumenController::class, 'downloadSigned'])
