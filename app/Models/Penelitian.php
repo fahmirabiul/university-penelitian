@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use App\Traits\HasResearchState;
 
 class Penelitian extends Model
 {
-    use HasFactory;
+    use HasFactory, HasResearchState;
 
     protected $fillable = [
         'judul',
