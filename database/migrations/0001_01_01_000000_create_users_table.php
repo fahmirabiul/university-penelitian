@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->uuid('sso_id')->unique()->nullable(); // ID dari server university-sso
+            $table->uuid('sso_id')->unique()->nullable();
             $table->string('name');
             $table->string('email');
-            $table->string('role_lokal')->default('dosen'); // 'dosen' atau 'admin_lembaga'
             $table->rememberToken();
             $table->timestamps();
         });

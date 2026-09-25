@@ -12,10 +12,10 @@ Berdasarkan dokumen PRD, TDD, dan Blueprint ERD Anda, kita akan membagi eksekusi
 
 ## Fase 1: Fondasi Autentikasi & Identitas (SSO OAuth2)
 - [x] Instal package Laravel Socialite (`composer require laravel/socialite`).
-- [x] Modifikasi migration tabel `users` (hapus password, tambahkan `sso_id`, `role_lokal`).
-- [ ] Buat `SsoAuthController` untuk *redirect* & *callback* ke Identity Provider (IdP).
+- [x] Modifikasi migration tabel `users` (hapus password, tambahkan `sso_id`).
+- [x] Buat `SsoAuthController` untuk *redirect* & *callback* ke Identity Provider (IdP).
 - [x] Konfigurasi mekanisme *Guard/Provider* agar aplikasi mengenali user dari SSO.
-- [ ] **Redis Caching**: Implementasi cache untuk menyimpan data profil user dari SSO ke Redis (menghindari lambatnya N+1 HTTP Request ke server IdP).
+- [x] **Redis Caching**: Implementasi cache untuk menyimpan data profil user dari SSO ke Redis.
 
 ## Fase 2: Struktur Database Inti (Migrations & Models)
 - [ ] Buat Migration & Model: Domain Pengguna (Tabel `mahasiswa`).
