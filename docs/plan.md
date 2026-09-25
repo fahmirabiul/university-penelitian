@@ -18,12 +18,31 @@ Berdasarkan dokumen PRD, TDD, dan Blueprint ERD Anda, kita akan membagi eksekusi
 - [x] **Redis Caching**: Implementasi cache untuk menyimpan data profil user dari SSO ke Redis.
 
 ## Fase 2: Struktur Database Inti (Migrations & Models)
-- [ ] Buat Migration & Model: Domain Pengguna (Tabel `mahasiswa`).
-- [ ] Buat Migration & Model: Domain Penelitian (`penelitian`, relasi pivot `dosen`, `mahasiswa`, `reviewer`).
-- [ ] Buat Migration & Model: Dokumen Polimorfik (`dokumen_penelitian`).
-- [ ] Buat Migration & Model: Insentif & Publikasi (`periode_insentif`, `pagu_insentif`, `publikasi`, `insentif`, `insentif_distribusi`).
-- [ ] Buat Migration & Model: Audit Trail (`audit_logs`).
-- [ ] Buat Factory & Seeder: Isi data dummy/awal (Pagu, Dosen, Mahasiswa).
+
+### 2.1 Domain Pengguna & Akses
+- [x] Buat Migration & Model `Mahasiswa` (Kolom: nim, nama, program_studi).
+
+### 2.2 Domain Transaksi Inti (Penelitian)
+- [x] Buat Migration & Model `Penelitian` (Kolom: judul, abstrak, status_saat_ini, tanggal_pengajuan).
+- [x] Buat Migration tabel pivot `penelitian_dosen` (Kolom: penelitian_id, user_id, peran).
+- [x] Buat Migration tabel pivot `penelitian_mahasiswa` (Kolom: penelitian_id, mahasiswa_id).
+- [x] Buat Migration tabel pivot `penelitian_reviewer` (Kolom: penelitian_id, user_id, nilai_desk_eval, komentar, dll).
+- [x] Buat Migration & Model `DokumenPenelitian` (Kolom: documentable_type, documentable_id, tipe_dokumen, file_path, uploaded_by) - Polimorfik.
+
+### 2.3 Domain Luaran & Insentif
+- [x] Buat Migration & Model `PeriodeInsentif` (Kolom: nama_periode, tanggal_mulai, tanggal_selesai, status_aktif).
+- [x] Buat Migration & Model `PaguInsentif` (Kolom: tingkat_quartil, nominal_base).
+- [x] Buat Migration & Model `Publikasi` (Kolom: penelitian_id, judul_publikasi, tingkat_quartil, informasi_jurnal (JSON), status_publikasi).
+- [x] Buat Migration & Model `Insentif` (Kolom: publikasi_id, periode_insentif_id, status, total_dana).
+- [x] Buat Migration & Model `InsentifDistribusi` (Kolom: insentif_id, user_id, peran, persentase_potongan, nominal_final).
+
+### 2.4 Domain Audit & Log
+- [x] Buat Migration & Model `AuditLog` (Kolom: model_type, model_id, user_id, status_sebelum, status_sesudah, catatan_sistem).
+
+### 2.5 Factory & Seeder
+- [x] Buat Factory & Seeder `MahasiswaSeeder` (Generate 100 data mahasiswa dummy).
+- [x] Buat Seeder `PaguInsentifSeeder` (Isi referensi standar Q1-Q4/Sinta).
+- [x] Buat Seeder `PeriodeInsentifSeeder` (Generate 1-2 periode aktif dummy).
 
 ## Fase 3: Core Design Patterns (State, Observer, Service)
 - [ ] **State Pattern**: Buat base class & turunan State (`DraftState`, `DeskEvalState`, `ApprovedState`) untuk kontrol perubahan status proposal yang persisten.
