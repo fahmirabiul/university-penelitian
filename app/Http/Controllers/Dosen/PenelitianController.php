@@ -50,9 +50,9 @@ class PenelitianController extends Controller
         if ($request->hasFile('proposal_file')) {
             $path = $request->file('proposal_file')->store('private/dokumen_proposal');
             $penelitian->dokumen()->create([
-                'nama_dokumen' => 'Proposal: ' . $penelitian->judul,
-                'path_file' => $path,
-                'jenis_dokumen' => 'proposal',
+                'tipe_dokumen' => 'proposal',
+                'file_path' => $path,
+                'uploaded_by' => Auth::id(),
             ]);
         }
 

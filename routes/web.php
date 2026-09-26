@@ -43,3 +43,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/dokumen/signed/{dokumen}', [\App\Http\Controllers\DokumenController::class, 'downloadSigned'])
     ->name('dokumen.download.signed')
     ->middleware('signed');
+
+Route::post('/api/webhook/sso-logout', [\App\Http\Controllers\Api\WebhookController::class, 'ssoLogout']);
+
+Route::post('/admin/penelitian/{penelitian}/decide', [\App\Http\Controllers\Admin\PenelitianController::class, 'decide'])->name('admin.penelitian.decide');

@@ -7,6 +7,7 @@ use App\Models\Penelitian;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class PenelitianController extends Controller
 {
@@ -19,7 +20,7 @@ class PenelitianController extends Controller
     public function show(Penelitian $penelitian)
     {
         $penelitian->load(['dokumen', 'dosen', 'reviewer']);
-        
+
         $calonReviewer = User::where('role_lokal', 'dosen')
             ->whereNotIn('id', $penelitian->dosen->pluck('id'))
             ->get();
@@ -47,5 +48,28 @@ class PenelitianController extends Controller
         });
 
         return back()->with('success', 'Reviewer berhasil ditugaskan dan status diperbarui.');
+    }
+    public function decide(Request $request, Penelitian $penelitian)
+    {
+        Gate::authorize('decide', $penelitian);
+
+        $validated = $request->validate([
+            'keputusan' => 'required|in:approved,rejected',
+        ]);
+
+        if ($penelitian->status_saat_ini !== 'desk_eval' || !$penelitian->isAllReviewersFinished()) {
+            return back()->with('error', 'Proposal belum memenuhi syarat untuk diputuskan.');
+        }
+
+        try {
+            if ($validated['keputusan'] === 'approved') {
+                $penelitian->state()->approve();
+            } else {
+                $penelitian->state()->reject();
+            }
+            return back()->with('success', 'Keputusan akhir berhasil disimpan.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal memproses keputusan: ' . $e->getMessage());
+        }
     }
 }

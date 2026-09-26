@@ -69,6 +69,7 @@ class SsoAuthController extends Controller
             $request->session()->regenerateToken();
         }
 
-        return redirect('/');
+        $redirectUri = urlencode(url('/'));
+        return redirect(config('services.sso.url', 'http://university-sso.test') . "/sso/logout?redirect_uri={$redirectUri}");
     }
 }

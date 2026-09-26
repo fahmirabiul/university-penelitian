@@ -58,4 +58,12 @@ class Penelitian extends Model
     {
         return $this->morphMany(DokumenPenelitian::class, 'documentable');
     }
+    public function isAllReviewersFinished(): bool
+    {
+        if ($this->reviewer()->count() === 0) {
+            return false;
+        }
+        return $this->reviewer()->wherePivot('status_review', 'pending')->count() === 0;
+    }
 }
+

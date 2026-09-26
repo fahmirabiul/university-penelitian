@@ -37,14 +37,15 @@ class PenilaianController extends Controller
         Gate::authorize('review', $penelitian);
 
         $validated = $request->validate([
-            'nilai_desk' => 'required|numeric|min:0|max:100',
-            'komentar_desk' => 'required|string',
+            'nilai_desk_eval' => 'required|numeric|min:0|max:100',
+            'komentar_desk_eval' => 'required|string',
         ]);
 
         $penelitian->reviewer()->updateExistingPivot(Auth::id(), [
-            'nilai_desk' => $validated['nilai_desk'],
-            'komentar_desk' => $validated['komentar_desk'],
+            'nilai_desk_eval' => $validated['nilai_desk_eval'],
+            'komentar_desk_eval' => $validated['komentar_desk_eval'],
             'status_review' => 'reviewed_desk',
+            'tanggal_dinilai' => now(),
         ]);
 
         return redirect()->route('reviewer.penilaian.index')->with('success', 'Penilaian Desk Evaluation berhasil disimpan.');

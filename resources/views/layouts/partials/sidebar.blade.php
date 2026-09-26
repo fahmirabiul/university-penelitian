@@ -30,24 +30,24 @@
       </li>
       @endif
 
-      @if(auth()->user()->role_lokal == 'reviewer')
+      @if(auth()->user()->role_lokal == 'dosen' || auth()->user()->role_lokal == 'ketua_peneliti')
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">Menu Reviewer</span>
       </li>
       <li class="menu-item">
-        <a href="{{ url('/reviewer/penelitian') }}" class="menu-link">
+        <a href="{{ route('reviewer.penilaian.index') }}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-check-shield"></i>
           <div data-i18n="Penugasan Review">Penugasan Review</div>
         </a>
       </li>
       @endif
 
-      @if(auth()->user()->role_lokal == 'admin_lppm')
+      @if(auth()->user()->role_lokal == 'admin_lembaga')
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">Menu LPPM (Admin)</span>
       </li>
       <li class="menu-item">
-        <a href="{{ url('/admin/penelitian') }}" class="menu-link">
+        <a href="{{ route('admin.penelitian.index') }}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-data"></i>
           <div data-i18n="Semua Proposal">Semua Proposal</div>
         </a>

@@ -61,4 +61,18 @@ class PenelitianPolicy
 
         return Response::allow();
     }
+
+    public function assignReviewer(User $user, Penelitian $penelitian): Response
+    {
+        return $user->role_lokal === 'admin_lembaga'
+            ? Response::allow()
+            : Response::deny('Hanya Admin LPPM yang dapat menugaskan reviewer.');
+    }
+
+    public function decide(User $user, Penelitian $penelitian): Response
+    {
+        return $user->role_lokal === 'admin_lembaga'
+            ? Response::allow()
+            : Response::deny('Hanya Admin LPPM yang dapat mengambil keputusan.');
+    }
 }
