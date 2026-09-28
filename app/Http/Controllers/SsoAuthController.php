@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
 
 class SsoAuthController extends Controller
@@ -20,7 +21,7 @@ class SsoAuthController extends Controller
         try {
             $ssoUser = Socialite::driver('sso')->user();
         } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Log::error('SSO Login Error: ' . $e->getMessage(), ['exception' => $e]);
+            Log::error('SSO Login Error: ' . $e->getMessage(), ['exception' => $e]);
             return redirect('/')->with('error', 'Gagal terhubung ke SSO: ' . $e->getMessage());
         }
 
@@ -29,7 +30,7 @@ class SsoAuthController extends Controller
 
         $ssoRoles = collect($ssoUser->user['roles'] ?? [])->pluck('name')->toArray();
         $roleLokal = 'dosen'; // Default
-        
+
         if (in_array('admin_unit', $ssoRoles) || in_array('admin', $ssoRoles)) {
             $roleLokal = 'admin_lembaga';
         } elseif (in_array('dosen', $ssoRoles)) {
